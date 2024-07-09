@@ -56,9 +56,13 @@ export default {
           'https://api.plantvsundead.com/mini-farms/analytics'
         )
         const data = await response.json()
-        analyticsData.value = data.data.sort(
-          (a, b) => b.seasonOrder - a.seasonOrder
-        ) // Assuming the API returns an array of seasons
+        console.log(
+          58,
+          data.data.sort((a, b) => b.seasonOrder - a.seasonOrder)
+        )
+        analyticsData.value = data.data
+          .filter((i) => i.analytics.trackSession)
+          .sort((a, b) => b.seasonOrder - a.seasonOrder) // Assuming the API returns an array of seasons
       } catch (error) {
         console.error('Error fetching analytics data:', error)
       }
